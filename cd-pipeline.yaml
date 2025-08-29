@@ -5,8 +5,13 @@ trigger: none
 resources:
   pipelines:
   - pipeline: dependant-cd-pipeline
-    project: azure-pipeline-poc
     source: john-morsley.azure-pipelines-poc-ci
+    project: azure-pipeline-poc
+    branch: main
+    trigger:
+     branches:
+      include:
+      - main 
 
 pool:
   vmImage: ubuntu-latest
