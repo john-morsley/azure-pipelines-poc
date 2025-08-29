@@ -47,4 +47,5 @@ steps:
   inputs:
     command: test
     projects: 'tests/Morsley.UK.Tests.API.UnitTests/Morsley.UK.Tests.API.UnitTests.csproj'
-    arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
+    arguments: '--configuration $(BuildConfiguration) /p:CollectCovergae=true /p:CoverletOutputFormat=cobertuna'
+    publishTestResults: true
