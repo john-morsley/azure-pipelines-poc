@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morsley.UK.Test.API", "Morsley.UK.Test.API\Morsley.UK.Test.API.csproj", "{85B08B3A-0B05-0433-50F1-E68F33726ECF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CB5506BB-B802-4FBF-9884-287B929D919E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morsley.UK.Tests.API.UnitTests", "..\Morsley.UK.Tests.API.UnitTests\Morsley.UK.Tests.API.UnitTests.csproj", "{BD3A2CC5-A22D-4B42-A9D9-79EC962960C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,12 +28,17 @@ Global
 		{85B08B3A-0B05-0433-50F1-E68F33726ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85B08B3A-0B05-0433-50F1-E68F33726ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85B08B3A-0B05-0433-50F1-E68F33726ECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD3A2CC5-A22D-4B42-A9D9-79EC962960C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD3A2CC5-A22D-4B42-A9D9-79EC962960C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD3A2CC5-A22D-4B42-A9D9-79EC962960C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD3A2CC5-A22D-4B42-A9D9-79EC962960C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{85B08B3A-0B05-0433-50F1-E68F33726ECF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{BD3A2CC5-A22D-4B42-A9D9-79EC962960C5} = {CB5506BB-B802-4FBF-9884-287B929D919E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57AB63DD-8B23-4FBB-8C98-BF28AA6D55B3}
