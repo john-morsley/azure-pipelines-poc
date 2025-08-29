@@ -11,14 +11,28 @@ steps:
 - script: echo Hello, from the CI pipeline!
   displayName: 'Run a one-line script'
 
-# Include .NET 8 SDK
+# Include .NET 8 SDK...
 - task: UseDotNet@2
   displayName: Include .NET 8 SDK
   inputs:
     packageType: sdk
     version: '8.0.x'
 
-# Double check the above has been done
+# Double check the above has been done...
 - task: CmdLine@2
   inputs:
     script: 'dotnet --list-sdks'
+
+# Show me the directory...
+- task: CmdLine@2
+  inputs:
+    script: 'dir'
+
+
+# Build the project...
+#- task: DotNetCoreCLI@2
+#  displayName: Build
+#  inputs:
+#    command: build
+#    projects: '**/.csproj'
+#    arguments: '--configuration $(BuildConfiguration)'
