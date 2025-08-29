@@ -15,3 +15,5 @@ CI - Continuous Integration
 CD - Continuous Delivery
 
 - Deployment to Azure Web Service
+
+TRIGGER CI/CD PIPELINE
