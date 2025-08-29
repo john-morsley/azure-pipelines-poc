@@ -20,19 +20,20 @@ steps:
 
 # Double check the above has been done...
 - task: CmdLine@2
+  displayName: List .NET SDKs
   inputs:
     script: 'dotnet --list-sdks'
 
 # Show me the directory...
 - task: CmdLine@2
+  displayName: Show directory contents
   inputs:
     script: 'dir'
 
-
-# Build the project...
-#- task: DotNetCoreCLI@2
-#  displayName: Build
-#  inputs:
-#    command: build
-#    projects: '**/.csproj'
-#    arguments: '--configuration $(BuildConfiguration)'
+# Build the API project...
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: 'src/Morsley.UK.Test.API/Morsley.UK.Test.API.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
