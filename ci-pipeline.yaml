@@ -49,3 +49,11 @@ steps:
     projects: 'tests/Morsley.UK.Tests.API.UnitTests/Morsley.UK.Tests.API.UnitTests.csproj'
     arguments: '--configuration $(BuildConfiguration) /p:CollectCovergae=true /p:CoverletOutputFormat=cobertuna'
     publishTestResults: true
+
+- task: PublishCodeCoverageResults@1
+  displayName: "----------> Publish Code Coverage Results <----------"
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: 'tests/Morsley.UK.Tests.API.UnitTests/coverage.cobertura.xml'
+    reportDirectory: 'tests/Morsley.UK.Tests.API.UnitTests/TestResults'
+    failIfCoverageEmpty: true
