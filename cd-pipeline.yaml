@@ -1,0 +1,10 @@
+name: CD Pipeline
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, from the CD pipeline!
+  displayName: 'Run a one-line script'
