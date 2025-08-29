@@ -1,6 +1,15 @@
 name: CD Pipeline
-trigger:
-- main
+
+trigger: none
+
+resources:
+  pipelines:
+  - pipeline: ci-pipeline
+    source: 'CI Pipeline'
+    trigger:
+      branches:
+        include:
+          - main
 
 pool:
   vmImage: ubuntu-latest
