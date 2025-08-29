@@ -12,25 +12,25 @@ variables:
 
 steps:
 
-- script: echo Hello, from the CI pipeline!
-  displayName: 'Run a one-line script'
+#- script: echo Hello, from the CI pipeline!
+#  displayName: 'Run a one-line script'
 
 # Include .NET 8 SDK...
 - task: UseDotNet@2
-  displayName: Include .NET 8 SDK
+  displayName: "----------> Include .NET 8 SDK <----------"
   inputs:
     packageType: sdk
     version: '8.0.x'
 
 # Double check the above has been done...
 - task: CmdLine@2
-  displayName: List .NET SDKs
+  displayName: "----------> List .NET SDKs <----------"
   inputs:
     script: 'dotnet --list-sdks'
 
 # Show me the directory...
 - task: CmdLine@2
-  displayName: Show directory contents
+  displayName: "----------> Show directory contents <----------"
   inputs:
     script: 'dir'
 
@@ -46,5 +46,5 @@ steps:
   displayName: "----------> Run API Unit Tests <----------"
   inputs:
     command: test
-    projects: 'tests/Morsley.UK.Tests.API.UnitTests.csproj'
+    projects: 'tests/Morsley.UK.Tests.API.UnitTests/Morsley.UK.Tests.API.UnitTests.csproj'
     arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
