@@ -6,6 +6,10 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  BuildPlatform: 'Any CPU'
+  BuildConfiguration: 'Release'
+
 steps:
 
 - script: echo Hello, from the CI pipeline!
