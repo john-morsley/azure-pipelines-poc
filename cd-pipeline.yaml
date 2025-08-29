@@ -6,7 +6,7 @@ resources:
   pipelines:
   - pipeline: dependant-cd-pipeline
     project: azure-pipeline-poc
-    source: john-morsley.azure-pipelines-poc
+    source: john-morsley.azure-pipelines-poc-ci
     trigger:
       branches:
         include:
