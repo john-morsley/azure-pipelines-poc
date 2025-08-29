@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI-Pipeline
 
 trigger:
 - main
@@ -7,5 +7,5 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, from CI pipeline!
+- script: echo Hello, from the CI pipeline!
   displayName: 'Run a one-line script'
