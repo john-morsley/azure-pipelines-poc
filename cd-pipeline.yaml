@@ -1,15 +1,16 @@
-name: CD Pipeline
+name: CD-Pipeline
 
 trigger: none
 
 resources:
   pipelines:
-  - pipeline: ci-pipeline
-    source: 'CI Pipeline'
+  - pipeline: dependant-cd-pipeline
+    project: azure-pipeline-poc
+    source: john-morsley.azure-pipelines-poc
     trigger:
       branches:
         include:
-          - main
+        - main
 
 pool:
   vmImage: ubuntu-latest
