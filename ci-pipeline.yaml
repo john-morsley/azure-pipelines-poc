@@ -50,6 +50,12 @@ steps:
     arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/'
     publishTestResults: true
 
+# Show me the directory...
+- task: CmdLine@2
+  displayName: "----------> Show directory contents <----------"
+  inputs:
+    script: 'dir'
+
 - task: PublishCodeCoverageResults@1
   displayName: "----------> Publish Code Coverage Results <----------"
   inputs:
