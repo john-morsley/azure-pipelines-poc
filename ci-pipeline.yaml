@@ -44,7 +44,7 @@ steps:
   inputs:
     command: test
     projects: 'tests/Morsley.UK.Tests.API.UnitTests/Morsley.UK.Tests.API.UnitTests.csproj'
-    arguments: '--configuration $(BuildConfiguration) --collect "XPlat Code Coverage --settings:cobertuna.settings.xml"'
+    arguments: '--configuration $(BuildConfiguration) --collect "XPlat Code Coverage --settings:./cobertuna.settings.xml"'
     publishTestResults: true
 
 # Show me the directory...
@@ -53,7 +53,7 @@ steps:
   inputs:
     script: 'dir'
 
-- task: PublishCodeCoverageResults@1
+- task: PublishCodeCoverageResults@2
   displayName: "--> Publish Code Coverage Results <--"
   inputs:
     codeCoverageTool: 'Cobertura'
