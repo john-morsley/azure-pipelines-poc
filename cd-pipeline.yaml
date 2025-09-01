@@ -17,5 +17,22 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, from the CD pipeline!
-  displayName: 'Run a one-line script'
+
+#- script: echo Hello, from the CD pipeline!
+#  displayName: 'Run a one-line script'
+
+- task: DownloadPipelineArtifact@2
+  displayName: "--> Download Artifacts from CI Pipeline <--"
+  inputs:
+    buildType: 'specific'
+    project: 'azure-pipeline-poc'
+    pipeline: 'john-morsley.azure-pipelines-poc-ci'
+    buildVersionToDownload: 'latest'
+    artifactName: 'drop'
+    targetPath: '$(Pipeline.Workspace)'
+
+# Show me the directory...
+- task: CmdLine@2
+  displayName: "--> Show directory contents <--"
+  inputs:
+    script: 'dir'

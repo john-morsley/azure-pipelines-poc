@@ -70,5 +70,5 @@ steps:
   displayName: "--> Publish Artifacts <--"
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'morsley.uk.test.api'
+    ArtifactName: 'drop'
     publishLocation: 'Container'
