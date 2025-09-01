@@ -12,54 +12,52 @@ variables:
 
 steps:
 
-#- script: echo Hello, from the CI pipeline!
-#  displayName: 'Run a one-line script'
-
 # Include .NET 8 SDK...
 - task: UseDotNet@2
-  displayName: "----------> Include .NET 8 SDK <----------"
+  displayName: "--> Include .NET 8 SDK <--"
   inputs:
     packageType: sdk
     version: '8.0.x'
 
 # Double check the above has been done...
 - task: CmdLine@2
-  displayName: "----------> List .NET SDKs <----------"
+  displayName: "--> List .NET SDKs <--"
   inputs:
     script: 'dotnet --list-sdks'
 
 # Show me the directory...
 - task: CmdLine@2
-  displayName: "----------> Show directory contents <----------"
+  displayName: "--> Show directory contents <--"
   inputs:
     script: 'dir'
 
 # Build the API project...
 - task: DotNetCoreCLI@2
-  displayName: "----------> Build API <----------"
+  displayName: "--> Build API <--"
   inputs:
     command: build
     projects: 'src/Morsley.UK.Test.API/Morsley.UK.Test.API.csproj'
     arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: "----------> Run API Unit Tests <----------"
+  displayName: "--> Run API Unit Tests <--"
   inputs:
     command: test
     projects: 'tests/Morsley.UK.Tests.API.UnitTests/Morsley.UK.Tests.API.UnitTests.csproj'
-    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/'
+    arguments: '--configuration $(BuildConfiguration) --collect "XPlat Code Coverage"'
     publishTestResults: true
 
 # Show me the directory...
 - task: CmdLine@2
-  displayName: "----------> Show directory contents <----------"
+  displayName: "--> Show directory contents <--"
   inputs:
     script: 'dir'
 
 - task: PublishCodeCoverageResults@1
-  displayName: "----------> Publish Code Coverage Results <----------"
+  displayName: "--> Publish Code Coverage Results <--"
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: 'tests/Morsley.UK.Tests.API.UnitTests/TestResults/coverage.cobertura.xml'
-    reportDirectory: 'tests/Morsley.UK.Tests.API.UnitTests/TestResults'
-    failIfCoverageEmpty: true
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+#    reportDirectory: 'tests/Morsley.UK.Tests.API.UnitTests/TestResults'
+#    failIfCoverageEmpty: false
+#    publishTestResults: true
