@@ -22,50 +22,11 @@ variables:
   artifactName: 'drop'
   packagePath: 'Morsley.UK.Test.API.zip'
 
-stages:
-
-- stage: deployProd
-  displayName: '--> Deploy to Azure App Service (Production) <--'
-  environment: 'production'
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-        - checkout: none
-      
-        # Download the artifact from the CI pipeline...
-        - download: ci
-          artifact: $(artifactName)
-
-        # Deploy to production App Service...  
-        - task: AzureWebApp@1
-          displayName: 'Deploy to Production'
-          inputs: 
-            azureSubscription: '$(azureSubsription)'
-            webAppName: '$(webAppName)'
-            appType: 'webApp'
-            package: '$(Pipeline.Workspace)/ci/$(artifactName)/$(packagePath)'
-
-
-
-        
-#steps:
-
-#- script: echo Hello, from the CD pipeline!
-#  displayName: 'Run a one-line script'
-
-#- task: DownloadPipelineArtifact@2
-#  displayName: "--> Download Artifacts from CI Pipeline <--"
-#  inputs:
-#    buildType: 'specific'
-#    project: 'azure-pipeline-poc'
-#    pipeline: 'john-morsley.azure-pipelines-poc-ci'
-#    buildVersionToDownload: 'latest'
-#    artifactName: 'drop'
-#    targetPath: '$(Pipeline.Workspace)'
-
-# Show me the directory...
-#- task: CmdLine@2
-#  displayName: "--> Show directory contents <--"
-#  inputs:
-#    script: 'dir'
+# Deploy our test API to production...  
+- task: AzureWebApp@1
+  displayName: '--> Deploy to Production <--'
+  inputs: 
+    azureSubscription: '$(azureSubsription)'
+    webAppName: '$(webAppName)'
+    appType: 'webApp'
+    package: '$(Pipeline.Workspace)/ci/$(artifactName)/$(packagePath)'
