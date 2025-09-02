@@ -18,7 +18,7 @@ pool:
 
 variables:
   azureSubscription: 'morsley-uk-test'
-  webAppName: 'morsley-uk-test-api'
+  appName: 'morsley-uk-test-api'
   artifactName: 'drop'
   packagePath: 'Morsley.UK.Test.API.zip'
 
@@ -29,6 +29,6 @@ steps:
     displayName: '--> Deploy to Production <--'
     inputs: 
       azureSubscription: '$(azureSubscription)'
-      webAppName: '$(webAppName)'
+      appName: '$(webAppName)'
       appType: 'webApp'
       package: '$(Pipeline.Workspace)/ci/$(artifactName)/$(packagePath)'
