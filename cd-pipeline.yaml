@@ -22,11 +22,13 @@ variables:
   artifactName: 'drop'
   packagePath: 'Morsley.UK.Test.API.zip'
 
-# Deploy our test API to production...  
-- task: AzureWebApp@1
-  displayName: '--> Deploy to Production <--'
-  inputs: 
-    azureSubscription: '$(azureSubsription)'
-    webAppName: '$(webAppName)'
-    appType: 'webApp'
-    package: '$(Pipeline.Workspace)/ci/$(artifactName)/$(packagePath)'
+steps:
+
+  # Deploy our test API to production...  
+  - task: AzureWebApp@1
+    displayName: '--> Deploy to Production <--'
+    inputs: 
+      azureSubscription: '$(azureSubsription)'
+      webAppName: '$(webAppName)'
+      appType: 'webApp'
+      package: '$(Pipeline.Workspace)/ci/$(artifactName)/$(packagePath)'
