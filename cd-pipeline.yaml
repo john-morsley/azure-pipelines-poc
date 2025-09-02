@@ -29,6 +29,6 @@ steps:
     displayName: '--> Deploy to Production <--'
     inputs: 
       azureSubscription: '$(azureSubscription)'
-      appName: '$(webAppName)'
+      appName: '$(appName)'
       appType: 'webApp'
       package: '$(Pipeline.Workspace)/ci/$(artifactName)/$(packagePath)'
