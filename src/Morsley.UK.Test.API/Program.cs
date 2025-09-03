@@ -1,34 +1,30 @@
+namespace Morsley.UK.Test.API;
 
-namespace Morsley.UK.Test.API
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        var app = builder.Build();
+
+        app.UseSwagger();
+        app.UseSwaggerUI(options =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Morsley UK Test API");
+            options.RoutePrefix = string.Empty;
+        });
 
-            // Add services to the container.
+        app.UseHttpsRedirection();
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+        app.UseAuthorization();
 
-            var app = builder.Build();
+        app.MapControllers();
 
-            // Configure the HTTP request pipeline.
-            app.UseSwagger();
-            app.UseSwaggerUI();
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-            app.MapGet("/", () => Results.Redirect("/swagger"));
-
-            app.MapControllers();
-
-            app.Run();
-        }
+        app.Run();
     }
 }
