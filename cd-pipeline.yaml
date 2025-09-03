@@ -49,11 +49,11 @@ steps:
   displayName: "--> Verify deployment package from CI pipeline <--"
   inputs:
     script: |
-      if [ -f "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" ]; then
-        echo "OK: Deployment package found: morsley-uk-test-api.zip"
-        echo "Package size: $(stat -f%z "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" 2>/dev/null || stat -c%s "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip") bytes"
+      if [ -f "$(Pipeline.Workspace)/artifacts/publish/Morsley.UK.Test.API.zip" ]; then
+        echo "OK: Deployment package found: Morsley.UK.Test.API.zip"
+        echo "Package size: $(stat -f%z "$(Pipeline.Workspace)/artifacts/publish/Morsley.UK.Test.API.zip" 2>/dev/null || stat -c%s "$(Pipeline.Workspace)/artifacts/publish/Morsley.UK.Test.API.zip") bytes"
         echo "Package contents:"
-        unzip -l "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" | head -20
+        unzip -l "$(Pipeline.Workspace)/artifacts/publish/Morsley.UK.Test.API.zip" | head -20
       else
         echo "ERROR: Deployment package not found!"
         echo "Available files in artifacts directory:"
@@ -68,5 +68,5 @@ steps:
     azureSubscription: '$(azureSubscription)'
     appName: '$(appName)'
     appType: 'webApp'
-    package: '$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip'
+    package: '$(Pipeline.Workspace)/artifacts/publish/Morsley.UK.Test.API.zip'
     deploymentMethod: 'auto'
