@@ -42,7 +42,7 @@ steps:
       echo "Contents of artifacts directory:"
       ls -la $(Pipeline.Workspace)/artifacts
       echo "Contents of publish directory:"
-      ls -la $(Pipeline.Workspace)/artifacts/publis
+      ls -la $(Pipeline.Workspace)/artifacts/publish
 
 # Verify deployment package exists...
 - task: CmdLine@2
