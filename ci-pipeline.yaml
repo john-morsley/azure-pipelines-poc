@@ -45,8 +45,20 @@ steps:
   inputs:
     command: test
     projects: 'tests/Morsley.UK.Tests.API.UnitTests/Morsley.UK.Tests.API.UnitTests.csproj'
-    arguments: '--configuration $(BuildConfiguration) --collect "XPlat Code Coverage --settings:./cobertura.settings.xml"'
+    arguments: '--configuration $(BuildConfiguration) --collect:"XPlat Code Coverage" --settings cobertura.settings.xml'
     publishTestResults: true
+
+# Debug: Show coverage files location...
+- task: CmdLine@2
+  displayName: "--> Debug: Show coverage files <--"
+  inputs:
+    script: |
+      echo "Contents of Agent.TempDirectory:"
+      find $(Agent.TempDirectory) -name "*.xml" -type f 2>/dev/null || echo "No XML files found in Agent.TempDirectory"
+      echo "Contents of current directory:"
+      find . -name "coverage*.xml" -type f 2>/dev/null || echo "No coverage XML files found in current directory"
+      echo "All XML files in TestResults:"
+      find . -path "*/TestResults/*" -name "*.xml" -type f 2>/dev/null || echo "No XML files found in TestResults"
 
 # Publish code coverage results...
 - task: PublishCodeCoverageResults@2
@@ -54,6 +66,7 @@ steps:
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+    pathToSources: '$(System.DefaultWorkingDirectory)'
 
 # Publish the API...
 - task: DotNetCoreCLI@2
