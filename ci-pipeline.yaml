@@ -78,6 +78,16 @@ steps:
     publishWebProjects: false
     zipAfterPublish: false
 
+# Create deployment package...
+- task: ArchiveFiles@2
+  displayName: '--> Create deployment package <--'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/api'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/morsley-uk-test-api.zip'
+    replaceExistingArchive: true
+
 # Publish pipeline artifacts for CD pipeline...
 - task: PublishPipelineArtifact@1
   displayName: "--> Publish pipeline artifacts for CD pipeline <--"

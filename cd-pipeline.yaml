@@ -44,11 +44,29 @@ steps:
       echo "Contents of API directory:"
       ls -la $(Pipeline.Workspace)/artifacts/api
 
+# Verify deployment package exists...
+- task: CmdLine@2
+  displayName: "--> Verify deployment package <--"
+  inputs:
+    script: |
+      if [ -f "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" ]; then
+        echo "✅ Deployment package found: morsley-uk-test-api.zip"
+        echo "Package size: $(stat -f%z "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" 2>/dev/null || stat -c%s "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip") bytes"
+        echo "Package contents:"
+        unzip -l "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" | head -20
+      else
+        echo "❌ ERROR: Deployment package not found!"
+        echo "Available files in artifacts directory:"
+        find $(Pipeline.Workspace)/artifacts -type f -name "*.zip"
+        exit 1
+      fi
+
 # Deploy our test API to production...  
-#- task: AzureWebApp@1
-#  displayName: '--> Deploy to Production <--'
-#  inputs: 
-#    azureSubscription: '$(azureSubscription)'
-#    appName: '$(appName)'
-#    appType: 'webApp'
-#    package: '$(Pipeline.Workspace)/artifacts/api'
+- task: AzureWebApp@1
+  displayName: '--> Deploy to Production <--'
+  inputs: 
+    azureSubscription: '$(azureSubscription)'
+    appName: '$(appName)'
+    appType: 'webApp'
+    package: '$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip'
+    deploymentMethod: 'auto'
