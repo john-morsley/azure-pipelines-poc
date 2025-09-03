@@ -17,5 +17,26 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+# Download artifacts from CI pipeline...
+- task: DownloadPipelineArtifact@2
+  displayName: "--> Download CI Pipeline Artifacts <--"
+  inputs:
+    buildType: 'specific'
+    project: 'azure-pipeline-poc'
+    definition: 'john-morsley.azure-pipelines-poc-ci'
+    buildVersionToDownload: 'latest'
+    artifactName: 'drop'
+    targetPath: '$(Pipeline.Workspace)/artifacts'
+
+# Show downloaded artifacts...
+- task: CmdLine@2
+  displayName: "--> Show downloaded artifacts <--"
+  inputs:
+    script: |
+      echo "Contents of artifacts directory:"
+      ls -la $(Pipeline.Workspace)/artifacts
+      echo "Contents of API directory:"
+      ls -la $(Pipeline.Workspace)/artifacts/api
+
 - script: echo Hello, from the CD pipeline!
   displayName: 'Run a one-line script'
