@@ -16,6 +16,12 @@ resources:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  azureSubscription: 'morsley-uk-test'
+  appName: 'morsley-uk-test-api'
+  artifactName: 'drop'
+  packagePath: 'Morsley.UK.Test.API.zip'
+
 steps:
 # Download artifacts from CI pipeline...
 - task: DownloadPipelineArtifact@2
@@ -38,5 +44,11 @@ steps:
       echo "Contents of API directory:"
       ls -la $(Pipeline.Workspace)/artifacts/api
 
-- script: echo Hello, from the CD pipeline!
-  displayName: 'Run a one-line script'
+  # Deploy our test API to production...  
+  - task: AzureWebApp@1
+    displayName: '--> Deploy to Production <--'
+    inputs: 
+      azureSubscription: '$(azureSubscription)'
+      appName: '$(appName)'
+      appType: 'webApp'
+      package: '$(Pipeline.Workspace)/ci/$(artifactName)/$(packagePath)'

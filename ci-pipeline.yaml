@@ -59,6 +59,19 @@ steps:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
 
+- task: DotNetCoreCLI@2
+  displayName: "--> Publish .NET Project <--"
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: "--> Publish Artifacts <--"
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 # Publish the API project...
 - task: DotNetCoreCLI@2
   displayName: "--> Publish API <--"
