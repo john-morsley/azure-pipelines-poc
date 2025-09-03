@@ -1,43 +1,29 @@
-namespace Morsley.UK.Test.API;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    public static void Main(string[] args)
-    {
-        var builder = WebApplication.CreateBuilder(args);
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Morsley UK Test API");
+    //options.RoutePrefix = "swagger";
+});
 
-        //builder.Services.AddControllers();
-        builder.Services.AddControllersWithViews();
+app.UseHttpsRedirection();
+app.UseRouting();
 
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+app.UseAuthorization();
 
-        var app = builder.Build();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-        app.UseDefaultFiles();
-        app.UseStaticFiles();
-
-        app.UseSwagger();
-        app.UseSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Morsley UK Test API");
-            options.RoutePrefix = "swagger";
-        });
-
-        app.UseHttpsRedirection();
-        app.UseRouting();
-
-        app.UseAuthorization();
-
-        //app.MapControllers();
-
-        //app.MapStaticAssets();
-
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
-            //.WithStaticAssets();
-
-        app.Run();
-    }
-}
+app.Run();
