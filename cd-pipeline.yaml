@@ -46,16 +46,16 @@ steps:
 
 # Verify deployment package exists...
 - task: CmdLine@2
-  displayName: "--> Verify deployment package <--"
+  displayName: "--> Verify deployment package from CI pipeline <--"
   inputs:
     script: |
       if [ -f "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" ]; then
-        echo "✅ Deployment package found: morsley-uk-test-api.zip"
+        echo "OK: Deployment package found: morsley-uk-test-api.zip"
         echo "Package size: $(stat -f%z "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" 2>/dev/null || stat -c%s "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip") bytes"
         echo "Package contents:"
         unzip -l "$(Pipeline.Workspace)/artifacts/morsley-uk-test-api.zip" | head -20
       else
-        echo "❌ ERROR: Deployment package not found!"
+        echo "ERROR: Deployment package not found!"
         echo "Available files in artifacts directory:"
         find $(Pipeline.Workspace)/artifacts -type f -name "*.zip"
         exit 1

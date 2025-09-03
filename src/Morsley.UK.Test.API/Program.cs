@@ -27,6 +27,7 @@ namespace Morsley.UK.Test.API
 
             app.UseAuthorization();
 
+            app.MapGet("/", () => Results.Redirect("/swagger"));
 
             app.MapControllers();
 
