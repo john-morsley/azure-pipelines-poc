@@ -12,6 +12,12 @@ variables:
 
 steps:
 
+# Show me the contents of the current directory (should be GitHub repository)...
+- task: CmdLine@2
+  displayName: "--> Show GitHub repository directory contents <--"
+  inputs:
+    script: 'dir'
+
 # Include .NET 8 SDK...
 - task: UseDotNet@2
   displayName: "--> Include .NET 8 SDK <--"
@@ -25,12 +31,6 @@ steps:
   inputs:
     script: 'dotnet --list-sdks'
 
-# Show me the directory...
-- task: CmdLine@2
-  displayName: "--> Show directory contents <--"
-  inputs:
-    script: 'dir'
-
 # Build the API project...
 - task: DotNetCoreCLI@2
   displayName: "--> Build API <--"
@@ -39,6 +39,7 @@ steps:
     projects: 'src/Morsley.UK.Test.API/Morsley.UK.Test.API.csproj'
     arguments: '--configuration $(BuildConfiguration)'
 
+# Run the API unit tests...
 - task: DotNetCoreCLI@2
   displayName: "--> Run API Unit Tests <--"
   inputs:
@@ -47,35 +48,16 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --collect "XPlat Code Coverage --settings:./cobertuna.settings.xml"'
     publishTestResults: true
 
-# Show me the directory...
-- task: CmdLine@2
-  displayName: "--> Show directory contents <--"
-  inputs:
-    script: 'dir'
-
+# Publish code coverage results...
 - task: PublishCodeCoverageResults@2
   displayName: "--> Publish Code Coverage Results <--"
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
 
-#- task: DotNetCoreCLI@2
-#  displayName: "--> Publish .NET Project <--"
-#  inputs:
-#    command: 'publish'
-#    publishWebProjects: true
-#    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-
-#- task: PublishBuildArtifacts@1
-#  displayName: "--> Publish Artifacts <--"
-#  inputs:
-#    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#    ArtifactName: 'drop'
-#    publishLocation: 'Container'
-
-# Publish the API project...
+# Publish the API...
 - task: DotNetCoreCLI@2
-  displayName: "--> Publish API <--"
+  displayName: "--> Publish the API <--"
   inputs:
     command: publish
     projects: 'src/Morsley.UK.Test.API/Morsley.UK.Test.API.csproj'
@@ -83,9 +65,9 @@ steps:
     publishWebProjects: false
     zipAfterPublish: false
 
-# Publish artifacts for CD pipeline...
+# Publish pipeline artifacts for CD pipeline...
 - task: PublishPipelineArtifact@1
-  displayName: "--> Publish Pipeline Artifacts <--"
+  displayName: "--> Publish pipeline artifacts for CD pipeline <--"
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'drop'
