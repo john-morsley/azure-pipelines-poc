@@ -12,11 +12,14 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
+
         app.UseSwagger();
         app.UseSwaggerUI(options =>
         {
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "Morsley UK Test API");
-            options.RoutePrefix = string.Empty;
+            options.RoutePrefix = "swagger";
         });
 
         app.UseHttpsRedirection();
