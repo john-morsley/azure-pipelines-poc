@@ -41,8 +41,8 @@ steps:
     script: |
       echo "Contents of artifacts directory:"
       ls -la $(Pipeline.Workspace)/artifacts
-      echo "Contents of API directory:"
-      ls -la $(Pipeline.Workspace)/artifacts/api
+      echo "Contents of publish directory:"
+      ls -la $(Pipeline.Workspace)/artifacts/publis
 
 # Verify deployment package exists...
 - task: CmdLine@2
