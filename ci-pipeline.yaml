@@ -45,7 +45,7 @@ steps:
   inputs:
     command: test
     projects: 'tests/Morsley.UK.Tests.API.UnitTests/Morsley.UK.Tests.API.UnitTests.csproj'
-    arguments: '--configuration $(BuildConfiguration) --collect "XPlat Code Coverage --settings:./cobertuna.settings.xml"'
+    arguments: '--configuration $(BuildConfiguration) --collect "XPlat Code Coverage --settings:./cobertura.settings.xml"'
     publishTestResults: true
 
 # Publish code coverage results...

@@ -1,6 +1,6 @@
 namespace Morsley.UK.Tests.API.UnitTests;
 
-public class ControllerTests
+public class ControllerUnitTests
 {
     [SetUp]
     public void Setup()
