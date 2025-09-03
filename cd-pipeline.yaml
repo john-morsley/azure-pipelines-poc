@@ -44,11 +44,11 @@ steps:
       echo "Contents of API directory:"
       ls -la $(Pipeline.Workspace)/artifacts/api
 
-  # Deploy our test API to production...  
-  - task: AzureWebApp@1
-    displayName: '--> Deploy to Production <--'
-    inputs: 
-      azureSubscription: '$(azureSubscription)'
-      appName: '$(appName)'
-      appType: 'webApp'
-      package: '$(Pipeline.Workspace)/ci/$(artifactName)/$(packagePath)'
+# Deploy our test API to production...  
+#- task: AzureWebApp@1
+#  displayName: '--> Deploy to Production <--'
+#  inputs: 
+#    azureSubscription: '$(azureSubscription)'
+#    appName: '$(appName)'
+#    appType: 'webApp'
+#    package: '$(Pipeline.Workspace)/artifacts/api'
