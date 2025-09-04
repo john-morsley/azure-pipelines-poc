@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Morsley.UK.Test.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/test")]
 public class TestController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
